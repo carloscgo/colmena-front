@@ -1,0 +1,53 @@
+version: '3.7'
+name: 'colmena-front'
+services:
+  app:
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    image: colmena-front
+    container_name: app-service
+    restart: unless-stopped
+    working_dir: /app
+    command: sh -c "npm run dev"
+    volumes:
+      - ../../:/app
+    networks:
+      app-network:
+        ipv4_address: 172.20.11.2
+        aliases:
+          - app.local
+    build:
+      context: ../../
+      dockerfile: ./cicd/app/development/Dockerfile
+      target: runner
+
+  nginx:
+    build:
+      context: ../cicd/nginx
+      dockerfile: Dockerfile
+    container_name: nginx-service
+    restart: unless-stopped
+    env_file:
+      - ../../.env
+    ports:
+      - '${NGINX_PORT:-9100}:80'
+      - '${NGINX_PORT_SSL:-9443}:443'
+    volumes:
+      - ../../:/app
+      - ../nginx/config:/etc/nginx/conf.d/
+    networks:
+      app-network:
+        ipv4_address: 172.20.11.3
+        aliases:
+          - nginx.local
+    depends_on:
+      - app
+
+networks:
+  app-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.11.0/16
+          gateway: 172.20.11.1
