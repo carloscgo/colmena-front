@@ -13,19 +13,34 @@ interface Query {
   pageSize?: string;
 };
 
+const CACHE: any = {};
+
 export async function getServerSideProps({ query: { page, pageSize } }: { query: Query }) {
   const currentPage = String(page ?? 1);
+  const currentCache = CACHE[`${currentPage}`];
 
-  const { data } = await axios.get(serverRuntimeConfig.URL_API, {
-    params: {
-      _page: currentPage,
-      _limit: pageSize ?? 10,
+  let result = [];
+
+  if (currentCache?.length) {
+    result = currentCache;
+  } else {
+    const { data } = await axios.get(serverRuntimeConfig.URL_API, {
+      params: {
+        _page: currentPage,
+        _limit: pageSize ?? 10,
+      }
+    });
+
+    if (data.length) {
+      CACHE[`${currentPage}`] = data;
     }
-  });
+
+    result = data;
+  }
 
   return {
     props: {
-      data,
+      data: result,
       page: currentPage,
     },
   };
@@ -52,7 +67,7 @@ export default function ListPage({ data, page }: Props) {
         currentPage={page}
       />
 
-      <div className='px-[20%]'>
+      <div className='px-[20%] pb-[30px]'>
         {data.length > 0 ? (
           <>
             {data.map(({ id, title, body }, index) => (

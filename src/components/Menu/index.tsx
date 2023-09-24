@@ -1,6 +1,6 @@
 import { routes } from '@/utils';
 import Link from 'next/link';;
-import { BiHome, BiListOl } from 'react-icons/bi';
+import { BiHome, BiListOl, BiImage } from 'react-icons/bi';
 
 import MenuContent, { Sidebar, SidebarMini } from './styles';
 
@@ -19,6 +19,11 @@ const ItemsMenu = [
     label: 'List',
     url: routes.list,
     icon: <BiListOl />
+  },
+  {
+    label: 'Images',
+    url: routes.images,
+    icon: <BiImage />
   },
 ];
 

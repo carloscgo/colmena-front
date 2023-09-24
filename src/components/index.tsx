@@ -9,5 +9,6 @@ export { default as Providers } from './Providers'
 export { default as StyledRegistry } from './StyledRegistry'
 export { default as Pagination } from './Pagination'
 export { default as CardPost } from './CardPost'
+export { default as ModalFormImage } from './ModalFormImage'
 
 export * as Layouts from './layouts'

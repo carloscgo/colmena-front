@@ -91,7 +91,7 @@ export default function DashboardLayout({ children, ...props }: Props) {
           <Menu maxSidebar={maxSidebar} miniSidebar={miniSidebar} />
         </aside>
 
-        <div ref={content} className='content ml-12 transform ease-in-out duration-500 pt-20 px-2 md:px-5 pb-4'>
+        <div ref={content} className='content h-[100vh] ml-12 transform ease-in-out duration-500 pt-20 px-2 md:px-5 pb-4'>
           {children}
         </div>
       </Dashboard>
