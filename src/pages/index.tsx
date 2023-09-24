@@ -1,13 +1,23 @@
-import { Layouts } from "@/components"
+import { Layouts } from "@/components";
+import Image from "next/image";
 
 export default function IndexPage() {
-    return (
-        <Layouts.Dashboard className="text-dark dark:text-white">
-            <h1 className="text-3xl font-medium my-5">NextAuth.js Example</h1>
-            <p>
-                This is an example site to demonstrate how to use{" "}
-                <a href="https://next-auth.js.org">NextAuth.js</a> for authentication.
-            </p>
-        </Layouts.Dashboard>
-    )
-}
+  return (
+    <Layouts.Dashboard className="text-dark dark:text-white">
+      <div className="flex flex-col gap-8 w-[100%]">
+        <h1 className="text-3xl font-medium my-5">ColmenaLab</h1>
+        <p>
+          Bienvenido al reto técnico del Laboratorio Digital Colmena para desarrolladores Frontend.
+        </p>
+
+        <Image
+          alt='Seed'
+          src='https://picsum.photos/seed/picsum/536/354'
+          width={536}
+          height={354}
+        />
+      </div>
+    </Layouts.Dashboard>
+  );
+};
+

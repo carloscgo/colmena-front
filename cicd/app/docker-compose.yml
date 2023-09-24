@@ -14,17 +14,17 @@ services:
       - ../../:/app
     networks:
       app-network:
-        ipv4_address: 172.20.11.2
+        ipv4_address: 172.21.10.2
         aliases:
           - app.local
     build:
       context: ../../
-      dockerfile: ./cicd/app/development/Dockerfile
+      dockerfile: ./cicd/app/Dockerfile
       target: runner
 
   nginx:
     build:
-      context: ../cicd/nginx
+      context: ../nginx
       dockerfile: Dockerfile
     container_name: nginx-service
     restart: unless-stopped
@@ -38,7 +38,7 @@ services:
       - ../nginx/config:/etc/nginx/conf.d/
     networks:
       app-network:
-        ipv4_address: 172.20.11.3
+        ipv4_address: 172.21.10.3
         aliases:
           - nginx.local
     depends_on:
@@ -49,5 +49,5 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.20.11.0/16
-          gateway: 172.20.11.1
+        - subnet: 172.21.10.0/16
+          gateway: 172.21.10.1

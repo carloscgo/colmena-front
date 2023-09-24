@@ -11,15 +11,16 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "docker:dev:run": "docker-compose -f ./cicd/app/docker-compose.yml --env-file ./.env",
-    "docker:dev:build": "npm run docker:dev:run -- build",
-    "docker:dev:up": "npm run docker:dev:run -- up -d",
-    "docker:dev:command": "npm run docker:dev:run -- exec -ti --"
+    "docker:run": "docker compose -f ./cicd/app/docker-compose.yml --env-file ./.env",
+    "docker:build": "npm run docker:run -- build",
+    "docker:up": "npm run docker:run -- up -d",
+    "docker:command": "npm run docker:run -- exec -ti --"
   },
   "dependencies": {
     "@types/node": "20.6.3",
     "@types/react": "18.2.22",
     "@types/react-dom": "18.2.7",
+    "@types/styled-components": "5.1.27",
     "autoprefixer": "10.4.16",
     "axios": "1.5.0",
     "eslint": "8.50.0",
@@ -32,6 +33,7 @@
     "react-icons": "4.11.0",
     "redux": "4.2.1",
     "redux-toolkit": "1.1.2",
+    "styled-components": "6.0.8",
     "tailwindcss": "3.3.3",
     "typescript": "5.2.2",
     "yup": "1.2.0"
@@ -39,5 +41,9 @@
   "engines": {
     "npm": ">= 9.6.5",
     "node": ">= 18.13.0"
+  },
+  "devDependencies": {
+    "@swc/plugin-styled-components": "1.5.86",
+    "babel-plugin-styled-components": "2.1.4"
   }
 }
