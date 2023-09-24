@@ -26,12 +26,14 @@ export default function ImagesPage() {
     if (imagesStore.length) {
       dispatch(setImages(imagesStore));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (images.length) {
       setImagesStore(images);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [images]);
 
   const [action, setAction] = useState(ACTIONS.add);
