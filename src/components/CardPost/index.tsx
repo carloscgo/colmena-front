@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 interface Props {
   title: string;
@@ -8,21 +8,24 @@ interface Props {
 
 export default function CardPost({ title, body, image }: Props) {
   return (
-    <div className="w-full my-4">
-      <div className="flex items-start flex-row w-full border-gray-400 border-[1px] rounded-md p-3 gap-3">
-        <div className="p-2 rounded-md flex-none">
+    <div className='w-full my-4'>
+      <div className='flex items-start flex-row w-full border-gray-400 border-[1px] rounded-md p-3 gap-3'>
+        <div className='p-2 rounded-md flex-none'>
           <Image
             alt={title}
             src={image}
             width={200}
-            height={200}
+            height={132}
+            loading='lazy'
+            placeholder='blur'
+            blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMU8OmfDAAC3wGAT6zerAAAAABJRU5ErkJggg=='
           />
         </div>
-        <div className="flex flex-col gap-3 text-black dark:text-white h-full">
-          <div className="">
+        <div className='flex flex-col gap-3 text-black dark:text-white h-full'>
+          <div className=''>
             {title}
           </div>
-          <div className="text-xs">
+          <div className='text-xs'>
             {body}
           </div>
         </div>

@@ -14,14 +14,14 @@ export default function ButtonTheme() {
       document.documentElement.classList.add(Themes.dark)
       document.documentElement.classList.remove(Themes.light)
 
-      moon.current && moon.current.classList.add("hidden")
-      sun.current && sun.current.classList.remove("hidden")
+      moon.current && moon.current.classList.add('hidden')
+      sun.current && sun.current.classList.remove('hidden')
     } else {
       document.documentElement.classList.add(Themes.light)
       document.documentElement.classList.remove(Themes.dark)
 
-      sun.current && sun.current.classList.add("hidden")
-      moon.current && moon.current.classList.remove("hidden")
+      sun.current && sun.current.classList.add('hidden')
+      moon.current && moon.current.classList.remove('hidden')
     }
 
     setTheme(val);
@@ -33,10 +33,10 @@ export default function ButtonTheme() {
 
   return (
     <>
-      <div onClick={() => setDark(Themes.dark)} ref={moon} className="moon cursor-pointer text-white hover:text-blue-500 dark:hover:text-[#38BDF8]">
+      <div onClick={() => setDark(Themes.dark)} ref={moon} className='moon cursor-pointer text-white hover:text-blue-500 dark:hover:text-[#38BDF8]'>
         <BiMoon />
       </div>
-      <div onClick={() => setDark(Themes.light)} ref={sun} className="sun cursor-pointer hidden text-white hover:text-blue-500 dark:hover:text-[#38BDF8]">
+      <div onClick={() => setDark(Themes.light)} ref={sun} className='sun cursor-pointer hidden text-white hover:text-blue-500 dark:hover:text-[#38BDF8]'>
         <BiSun />
       </div>
     </>

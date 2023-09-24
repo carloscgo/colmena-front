@@ -1,9 +1,10 @@
-import { Nav, Layouts, Pagination, CardPost } from "@/components";
 import { BsHouseFill } from 'react-icons/bs'
-import { routes } from "@/utils";
-import { usePagination } from "@/hooks";
-import getConfig from "next/config";
+import getConfig from 'next/config';
 import axios from 'axios';
+
+import { Nav, Layouts, Pagination, CardPost, Alert } from '@/components';
+import { routes } from '@/utils';
+import { styleIconNav } from '@/utils/common';
 
 const { serverRuntimeConfig } = getConfig();
 
@@ -36,13 +37,9 @@ interface Props {
 };
 
 export default function ListPage({ data, page }: Props) {
-  const styleIconNav = { marginLeft: "4px", marginRight: "4px" }
-  console.log({ data, page })
-  const { currentPage, pageSize, onPageChange } = usePagination(page);
-
   return (
     <Layouts.Dashboard>
-      <Nav current="List" previous={[
+      <Nav current='List' previous={[
         {
           label: 'Home',
           icon: <BsHouseFill size='16px' style={{ ...styleIconNav }} />,
@@ -50,20 +47,36 @@ export default function ListPage({ data, page }: Props) {
         }
       ]} />
 
-      <div className="px-[20%]">
-        {data.map(({ id, title, body }) => (
-          <CardPost
-            key={id}
-            title={title}
-            body={body}
-            image={'https://picsum.photos/seed/picsum/536/354'}
-          />
-        ))}
+      <Pagination
+        count={data.length}
+        currentPage={page}
+      />
+
+      <div className='px-[20%]'>
+        {data.length > 0 ? (
+          <>
+            {data.map(({ id, title, body }, index) => (
+              <CardPost
+                key={id}
+                title={title}
+                body={body}
+                image={`https://picsum.photos/200/132?random=${(index + 1) * page}`}
+              />
+            ))}
+          </>) : (
+          <>
+            <Alert
+              message='No posts found'
+              type='warning'
+              showClose={false}
+            />
+          </>
+        )}
       </div>
 
       <Pagination
         count={data.length}
-        currentPage={currentPage}
+        currentPage={page}
       />
     </Layouts.Dashboard>
   );

@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Footer = styled.div`
   margin-top: 2rem;

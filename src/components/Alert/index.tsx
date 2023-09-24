@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import { MdClose } from 'react-icons/md';
 
 interface Props {
   message: string;
   title?: string;
   type: 'danger' | 'warning' | 'info' | 'success';
+  showClose?: boolean;
 };
 
-import AlertContent, { Title, Close } from "./styles";
+import AlertContent, { Title, Close } from './styles';
 
-export default function Alert({ message, type, title }: Props) {
+export default function Alert({ message, type, title, showClose = true }: Props) {
   const [show, setShow] = useState(true);
   const [color, setColor] = useState({
     text: '',
@@ -52,15 +53,17 @@ export default function Alert({ message, type, title }: Props) {
   if (!color.text || !show) return null;
 
   return (
-    <AlertContent className={`flex items-center p-4 mb-4 text-sm rounded-lg shadow-lg shadow-gray-500/20 ${color.text} ${color.textDark} ${color.bg} ${color.bgDark}`} role="alert">
-      <Title className="grow">
-        {title && <span className="font-medium">{title}</span>}
+    <AlertContent className={`flex items-center p-4 mb-4 text-sm rounded-lg shadow-lg shadow-gray-500/20 ${color.text} ${color.textDark} ${color.bg} ${color.bgDark}`} role='alert'>
+      <Title className='grow'>
+        {title && <span className='font-medium'>{title}</span>}
         {' '}{message}
       </Title>
 
-      <Close className="cursor-pointer hover:opacity-75" onClick={() => setShow(false)}>
-        <MdClose size="28px" className="text-gray-600" />
-      </Close>
+      {showClose && (
+        <Close className='cursor-pointer hover:opacity-75' onClick={() => setShow(false)}>
+          <MdClose size='28px' className='text-gray-600' />
+        </Close>
+      )}
     </AlertContent>
   );
 };
