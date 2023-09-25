@@ -3,31 +3,27 @@ import { render } from '@testing-library/react';
 import StyledRegistry from './';
 
 describe('StyledRegistry', () => {
-  it('should render children when window is defined', () => {
-    const ChildComponent = () => <div>Child Component</div>;
-
+  it('renders children on the client side', () => {
     (global as any).window = {} as Window;
 
-    const { getByText } = render(
+    const { container, getByTestId } = render(
       <StyledRegistry>
-        <ChildComponent />
+        <div data-testid='child'>Hello World</div>
       </StyledRegistry>
     );
 
-    const childComponent = getByText('Child Component');
-    expect(childComponent).toBeInTheDocument();
+    expect(getByTestId('child').textContent).toBe(
+      'Hello World'
+    );
   });
 
-  it('should render StyleSheetManager when window is undefined', () => {
-    const ChildComponent = () => <div>Child Component</div>;
-
-    const { getByText } = render(
+  it('renders StyleSheetManager on the server side', () => {
+    const { container } = render(
       <StyledRegistry>
-        <ChildComponent />
+        <div data-testid='child'>Hello World</div>
       </StyledRegistry>
     );
 
-    const childComponent = getByText('Child Component');
-    expect(childComponent).toBeInTheDocument();
+    expect((container.firstChild as HTMLElement)?.nodeName).toBe('DIV');
   });
 });

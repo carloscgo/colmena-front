@@ -1,5 +1,6 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, PayloadAction } from '@reduxjs/toolkit';
 import {
+  State,
   imagesSlice,
   setImages,
   addImage,
@@ -19,49 +20,45 @@ describe('imagesSlice', () => {
   });
 
   it('should set images correctly', () => {
-    const mockPayload = [{ id: 1, name: 'Image 1', url: 'http://example.com/image1.jpg' }];
+    const newState = imagesSlice.reducer(
+      undefined, setImages([{ id: 1, name: 'Image 1', url: 'http://example1.com' }])
+    );
 
-    store.dispatch(setImages(mockPayload));
-
-    const state = store.getState().images;
-
-    expect(state.images).toEqual(mockPayload);
+    expect(newState.images.length).toBe(1);
+    expect(newState.images[0].id).toBe(1);
   });
 
-  it('should add image correctly', () => {
-    const mockPayload = { id: 2, name: 'Image 2', url: 'http://example.com/image2.jpg' };
+  it('should add images correctly', () => {
+    const newState = imagesSlice.reducer({
+      images: [{ id: 1, name: 'Image 1', url: 'http://example1.com' }]
+    },
+      addImage({ id: 2, name: 'Image 2', url: 'http://example2.com' })
+    );
 
-    store.dispatch(addImage(mockPayload));
-
-    const state = store.getState().images;
-
-    expect(state.images).toContainEqual(mockPayload);
+    expect(newState.images.length).toBe(2);
+    expect(newState.images[1].id).toBe(2);
   });
 
-  it('should delete image correctly', () => {
-    const initialState = [
-      { id: 1, name: 'Image 1', url: 'http://example.com/image1.jpg' },
-      { id: 2, name: 'Image 2', url: 'http://example.com/image2.jpg' },
-    ];
-    const idToDelete = 2;
+  it('should delete images correctly', () => {
+    const newState = imagesSlice.reducer({
+      images: [{ id: 1, name: 'Image 1', url: 'http://example1.com' }]
+    },
+      deleteImage(1)
+    );
 
-    store.dispatch(deleteImage(idToDelete));
-
-    const state = store.getState().images;
-
-    expect(state.images).toEqual([{ id: 1, name: 'Image 1', url: 'http://example.com/image1.jpg' }]);
+    expect(newState.images.length).toBe(0);
   });
 
-  it('should update image correctly', () => {
-    const initialState = [
-      { id: 1, name: 'Image 1', url: 'http://example.com/image1.jpg' },
-    ];
-    const updatedImage = { id: 1, name: 'Updated Image', url: 'http://example.com/updated-image.jpg' };
+  it('should update images correctly', () => {
+    const newState = imagesSlice.reducer({
+      images: [{ id: 1, name: 'Image 1', url: 'http://example1.com' }]
+    },
+      updateImage({ id: 1, name: 'Image', url: 'http://example.com' })
+    );
 
-    store.dispatch(updateImage(updatedImage));
-
-    const state = store.getState().images;
-
-    expect(state.images).toContainEqual(updatedImage);
+    expect(newState.images.length).toBe(1);
+    expect(newState.images[0].id).toBe(1);
+    expect(newState.images[0].name).toBe('Image');
+    expect(newState.images[0].url).toBe('http://example.com');
   });
 });

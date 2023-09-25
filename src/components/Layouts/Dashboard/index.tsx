@@ -1,9 +1,10 @@
-import { useCallback, useRef } from 'react';
+import { useRef } from 'react';
 import { HiOutlineSquares2X2 } from 'react-icons/hi2';
 
 import { MetaTags, Menu, ButtonTheme, Providers } from '@/components';
 import Dashboard from './styles';
 import { appName } from '@/utils/common';
+import useSideBar from '@/hooks/useSideBar';
 
 interface Props {
   children: React.ReactNode;
@@ -20,37 +21,9 @@ export default function DashboardLayout({ children, ...props }: Props) {
 
   const { className = '', ...propsExtra } = { ...props };
 
-  const openNav = useCallback(() => {
-    if (!sidebar.current) return;
-
-    if (sidebar.current.classList.contains('-translate-x-48')) {
-      // max sidebar
-      sidebar.current.classList.remove('-translate-x-48')
-      sidebar.current.classList.add('translate-x-none')
-      maxSidebar.current && maxSidebar.current.classList.remove('hidden')
-      maxSidebar.current && maxSidebar.current.classList.add('flex')
-      miniSidebar.current && miniSidebar.current.classList.remove('flex')
-      miniSidebar.current && miniSidebar.current.classList.add('hidden')
-      maxToolbar.current && maxToolbar.current.classList.add('translate-x-0')
-      maxToolbar.current && maxToolbar.current.classList.remove('translate-x-24', 'scale-x-0')
-      logo.current && logo.current.classList.remove('ml-12')
-      content.current && content.current.classList.remove('ml-12')
-      content.current && content.current.classList.add('ml-12', 'md:ml-60')
-    } else {
-      // mini sidebar
-      sidebar.current.classList.add('-translate-x-48')
-      sidebar.current.classList.remove('translate-x-none')
-      maxSidebar.current && maxSidebar.current.classList.add('hidden')
-      maxSidebar.current && maxSidebar.current.classList.remove('flex')
-      miniSidebar.current && miniSidebar.current.classList.add('flex')
-      miniSidebar.current && miniSidebar.current.classList.remove('hidden')
-      maxToolbar.current && maxToolbar.current.classList.add('translate-x-24', 'scale-x-0')
-      maxToolbar.current && maxToolbar.current.classList.remove('translate-x-0')
-      logo.current && logo.current.classList.add('ml-12')
-      content.current && content.current.classList.remove('ml-12', 'md:ml-60')
-      content.current && content.current.classList.add('ml-12')
-    }
-  }, [sidebar, maxSidebar, miniSidebar, maxToolbar, logo, content]);
+  const openNav = useSideBar({
+    sidebar, maxSidebar, miniSidebar, maxToolbar, logo, content,
+  });
 
   return (
     <Providers>
@@ -71,7 +44,7 @@ export default function DashboardLayout({ children, ...props }: Props) {
           </div>
         </div>
 
-        <aside ref={sidebar} className='w-60 -translate-x-48 fixed transition transform ease-in-out duration-1000 z-50 flex h-screen bg-[#1E293B]'>
+        <aside ref={sidebar} data-testid='sidebar' className='w-60 -translate-x-48 fixed transition transform ease-in-out duration-1000 z-50 flex h-screen bg-[#1E293B]'>
           <div ref={maxToolbar} className='max-toolbar translate-x-24 scale-x-0 w-full -right-6 transition transform ease-in duration-300 flex items-center justify-between border-4 border-white dark:border-[#0F172A] bg-[#1E293B]  absolute top-2 rounded-full h-12'>
             <div className='flex pl-4 items-center space-x-2 '>
               <div>
@@ -84,7 +57,7 @@ export default function DashboardLayout({ children, ...props }: Props) {
               </div>
             </div>
           </div>
-          <div onClick={() => openNav()} className='cursor-pointer -right-6 transition transform ease-in-out duration-500 flex border-4 border-white dark:border-[#0F172A] bg-[#1E293B] dark:hover:bg-blue-500 hover:bg-purple-500 absolute top-2 p-3 rounded-full text-white hover:rotate-45'>
+          <div onClick={() => openNav()} data-testid='open-button' className='cursor-pointer -right-6 transition transform ease-in-out duration-500 flex border-4 border-white dark:border-[#0F172A] bg-[#1E293B] dark:hover:bg-blue-500 hover:bg-purple-500 absolute top-2 p-3 rounded-full text-white hover:rotate-45'>
             <HiOutlineSquares2X2 />
           </div>
 
