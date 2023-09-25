@@ -38,6 +38,7 @@ export default function CardPost({ title, body, image, labelEdit, labelDelete, o
                   <Button type='button'
                     className='hover:bg-indigo-600 hover:text-gray-100 self-end'
                     onClick={onEdit}
+                    data-testid='Edit'
                   >
                     {labelEdit}
                   </Button>
@@ -46,6 +47,7 @@ export default function CardPost({ title, body, image, labelEdit, labelDelete, o
                   <Button type='button'
                     className='hover:bg-red-600 hover:text-gray-100 self-end'
                     onClick={onDelete}
+                    data-testid='Delete'
                   >
                     {labelDelete}
                   </Button>

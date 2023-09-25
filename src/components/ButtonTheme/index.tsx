@@ -1,7 +1,7 @@
-import { useLocalStorage } from '@/hooks';
-import { Themes } from '@/utils';
 import { useCallback, useEffect, useRef } from 'react'
 import { BiMoon, BiSun } from 'react-icons/bi'
+import { useLocalStorage } from '@/hooks';
+import { Themes } from '@/utils';
 
 export default function ButtonTheme() {
   const [theme, setTheme] = useLocalStorage('theme', Themes.light);
@@ -33,10 +33,10 @@ export default function ButtonTheme() {
 
   return (
     <>
-      <div onClick={() => setDark(Themes.dark)} ref={moon} className='moon cursor-pointer text-white hover:text-blue-500 dark:hover:text-[#38BDF8]'>
+      <div data-testid='moon-button' onClick={() => setDark(Themes.dark)} ref={moon} className='moon cursor-pointer text-white hover:text-blue-500 dark:hover:text-[#38BDF8]'>
         <BiMoon />
       </div>
-      <div onClick={() => setDark(Themes.light)} ref={sun} className='sun cursor-pointer hidden text-white hover:text-blue-500 dark:hover:text-[#38BDF8]'>
+      <div data-testid='sun-button' onClick={() => setDark(Themes.light)} ref={sun} className='sun cursor-pointer hidden text-white hover:text-blue-500 dark:hover:text-[#38BDF8]'>
         <BiSun />
       </div>
     </>

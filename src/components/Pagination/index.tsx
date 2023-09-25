@@ -21,12 +21,12 @@ export default function Pagination({ count, currentPage = 1 }: Props) {
   return (
     <PaginationContent className='flex justify-around gap-5 w-[150px] mx-auto'>
       <PageItem className={prevClass}>
-        <PageLink href={`${routes.list}/?page=${prevPage}`} className={prevPageIsEnabled ? '' : disabled}>
+        <PageLink aria-disabled={!prevPageIsEnabled} href={`${routes.list}/?page=${prevPage}`} className={prevPageIsEnabled ? '' : disabled}>
           <BiChevronLeft /> Prev
         </PageLink>
       </PageItem>
       <PageItem className={nextClass}>
-        <PageLink href={`${routes.list}/?page=${nextPage}`} className={nextPageIsEnabled ? '' : disabled}>
+        <PageLink aria-disabled={!nextPageIsEnabled} href={`${routes.list}/?page=${nextPage}`} className={nextPageIsEnabled ? '' : disabled}>
           Next <BiChevronRight />
         </PageLink>
       </PageItem>

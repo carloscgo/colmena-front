@@ -60,7 +60,7 @@ export default function Alert({ message, type, title, showClose = true }: Props)
       </Title>
 
       {showClose && (
-        <Close className='cursor-pointer hover:opacity-75' onClick={() => setShow(false)}>
+        <Close data-testid='btn-close' className='cursor-pointer hover:opacity-75' onClick={() => setShow(false)}>
           <MdClose size='28px' className='text-gray-600' />
         </Close>
       )}

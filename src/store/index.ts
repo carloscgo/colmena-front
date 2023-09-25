@@ -1,10 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
-
 import { imagesSlice } from './images/reducer';
 
 // config the store
-const makeStore = () => configureStore({
+export const makeStore = () => configureStore({
   reducer: {
     [imagesSlice.name]: imagesSlice.reducer,
   },
@@ -12,4 +11,4 @@ const makeStore = () => configureStore({
 });
 
 // export default the store
-export default createWrapper(makeStore);;
+export default createWrapper(makeStore);

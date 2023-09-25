@@ -18,11 +18,11 @@ interface Props {
 
 export const schema = Yup.object().shape({
   name: Yup.string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Name is required"),
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Name is required'),
   url: Yup.string().url()
-    .required("Url is required"),
+    .required('Url is required'),
 });
 
 export default function ModalFormImage({ title, inputs, onSubmit, onClose }: Props) {
@@ -59,17 +59,25 @@ export default function ModalFormImage({ title, inputs, onSubmit, onClose }: Pro
             </label>
             <input id='name'
               {...formik.getFieldProps('name')}
-              className='mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border'
+              className={`mb-5 mt-2 ${formik.errors.name ? 'border-red-600 mb-0' : 'border-gray-300'} text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm  rounded border`}
               placeholder='Picture'
             />
+            {formik.errors.name && (
+              <div className='text-red-600 text-xs mb-4'>{formik.errors.name}</div>
+            )}
+
             <label htmlFor='url' className='text-gray-800 text-sm font-bold leading-tight tracking-normal'>
               Url
             </label>
             <input id='url'
               {...formik.getFieldProps('url')}
-              className='mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border'
+              className={`mb-5 mt-2 ${formik.errors.url ? 'border-red-600 mb-0' : 'border-gray-300'} text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm  rounded border`}
               placeholder='https://picsum.photos/seed/picsum/536/354'
             />
+            {formik.errors.url && (
+              <div className='text-red-600 text-xs mb-4'>{formik.errors.url}</div>
+            )}
+
             <div className='flex items-center justify-start w-full'>
               <button className='focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm'
                 onClick={handleSubmit}

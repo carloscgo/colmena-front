@@ -1,6 +1,4 @@
 export { default as Alert } from './Alert'
-export { default as Footer } from './Footer'
-export { default as Header } from './Header'
 export { default as MetaTags } from './MetaTags'
 export { default as Nav } from './Nav'
 export { default as ButtonTheme } from './ButtonTheme'
@@ -11,4 +9,4 @@ export { default as Pagination } from './Pagination'
 export { default as CardPost } from './CardPost'
 export { default as ModalFormImage } from './ModalFormImage'
 
-export * as Layouts from './layouts'
+export * as Layouts from './Layouts'
