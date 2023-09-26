@@ -9,8 +9,8 @@ To install dependencies, run:
 npm install
 ```
 
-## Starting the Nextjs App
-This command will start the Nextjs app in development mode.
+## Starting the Next.js App
+This command will start the Next.js app in development mode.
 
 ```
 npm run dev
@@ -61,11 +61,13 @@ npm run docker:up
 ```
 
 This command will **build a Docker image** using the Dockerfile file. Similar to docker:run, it also uses the .env environment variables file.
+
 ```
 npm run docker:build
 ```
 
 This command will **launch an interactive terminal** session within a running container. It runs the docker:run exec -ti -- command.
+
 ```
 npm run docker:command
 ```
