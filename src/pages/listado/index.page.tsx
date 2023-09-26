@@ -15,7 +15,7 @@ interface Query {
 
 const CACHE: any = {};
 
-export async function getServerSideProps({ query: { page, pageSize } }: { query: Query }) {
+export const requestServer = async ({ page, pageSize }: Query) => {
   const currentPage = String(page ?? 1);
   const currentCache = CACHE[`${currentPage}`];
 
@@ -39,12 +39,21 @@ export async function getServerSideProps({ query: { page, pageSize } }: { query:
   }
 
   return {
+    result,
+    currentPage,
+  };
+};
+
+export async function getServerSideProps({ query: { page, pageSize } }: { query: Query }) {
+  const { result, currentPage } = await requestServer({ page, pageSize });
+
+  return {
     props: {
       data: result,
       page: currentPage,
     },
   };
-}
+};
 
 interface Props {
   data: any[];
@@ -96,4 +105,3 @@ export default function ListPage({ data, page }: Props) {
     </Layouts.Dashboard>
   );
 };
-

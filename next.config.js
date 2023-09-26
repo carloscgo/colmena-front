@@ -3,6 +3,7 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  pageExtensions: ['page.tsx', 'page.ts'],
   async redirects() {
     return [
       {

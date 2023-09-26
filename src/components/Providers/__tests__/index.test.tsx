@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import Providers from './';
+import Providers from '..';
 
 describe('Providers', () => {
   it('should render child components', () => {

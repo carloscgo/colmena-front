@@ -1,4 +1,4 @@
-import { generateUUID } from "./common";
+import { generateUUID } from "../common";
 
 describe('generateUUID', () => {
   it('should generate a valid UUID with correct format', () => {

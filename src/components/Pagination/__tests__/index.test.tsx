@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
-import Pagination from './';
+import Pagination from '..';
 
 describe('Pagination', () => {
   it('should render the previous button correctly', () => {

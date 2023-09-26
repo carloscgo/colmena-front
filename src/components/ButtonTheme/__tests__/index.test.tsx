@@ -1,18 +1,14 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import ButtonTheme from './';
-import { useLocalStorage } from '../../hooks';
+import ButtonTheme from '..';
+import { useLocalStorage } from '../../../hooks';
 
-jest.mock('../../hooks', () => ({
+jest.mock('../../../hooks', () => ({
   useLocalStorage: jest.fn(),
 }));
 
 describe('ButtonTheme', () => {
   const mockUseLocalStorage = useLocalStorage as jest.Mock;
-
-  beforeEach(() => {
-    //mockUseLocalStorage.mockReset();
-  });
 
   it('should toggle theme and update CSS classes when moon button is clicked', () => {
     mockUseLocalStorage.mockReturnValue(['light', jest.fn()]);

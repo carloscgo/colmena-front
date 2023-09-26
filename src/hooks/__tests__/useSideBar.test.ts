@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import useSideBar from './useSideBar';
+import useSideBar from '../useSideBar';
 
 describe('useSideBar', () => {
   it('toggles the sidebar correctly', () => {

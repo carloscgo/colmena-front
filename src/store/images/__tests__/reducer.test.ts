@@ -1,12 +1,11 @@
-import { configureStore, PayloadAction } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import {
-  State,
   imagesSlice,
   setImages,
   addImage,
   deleteImage,
   updateImage,
-} from './reducer';
+} from '../reducer';
 
 describe('imagesSlice', () => {
   let store: ReturnType<typeof configureStore>;

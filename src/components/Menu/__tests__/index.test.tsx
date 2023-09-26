@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Menu from './';
+import Menu from '..';
 
 describe('Menu', () => {
   const maxSidebarRef = { current: null };

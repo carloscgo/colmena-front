@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import axios from 'axios';
-import ListPage, { getServerSideProps } from '.';
+import ListPage, { requestServer } from '../index.page';
 
 jest.mock('axios');
 
@@ -40,7 +40,7 @@ describe('ListPage', () => {
   });
 });
 
-describe('getServerSideProps', () => {
+describe('requestServer', () => {
   it('should fetch data from API and return props', async () => {
     const data = [
       { id: 1, title: 'Post 1', body: 'Body 1' },
@@ -50,13 +50,11 @@ describe('getServerSideProps', () => {
 
     (axios.get as jest.Mock).mockResolvedValueOnce({ data });
 
-    const result = await getServerSideProps({ query: { page } });
+    const result = await requestServer({ page });
 
     expect(result).toEqual({
-      props: {
-        data,
-        page: '1',
-      },
+      result: data,
+      currentPage: page,
     });
     expect(axios.get).toBeCalledWith(expect.any(String), {
       params: {
@@ -76,11 +74,11 @@ describe('getServerSideProps', () => {
     (axios.get as jest.Mock).mockResolvedValueOnce({ data: [] });
     (axios.get as jest.Mock).mockResolvedValueOnce({ data });
 
-    const result = await getServerSideProps({ query: { page } });
-    const cachedResult = await getServerSideProps({ query: { page } });
+    const result = await requestServer({ page });
+    const cachedResult = await requestServer({ page });
 
-    expect(result.props.data).toEqual(data);
-    expect(cachedResult.props.data).toEqual(data);
+    expect(result.result).toEqual(data);
+    expect(cachedResult.result).toEqual(data);
     expect(axios.get).toHaveBeenCalledTimes(1);
   });
 });

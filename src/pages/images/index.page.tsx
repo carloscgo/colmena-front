@@ -1,12 +1,12 @@
 import { BsHouseFill } from 'react-icons/bs'
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { BiImageAdd, BiSolidEditAlt, BiSolidTrash } from 'react-icons/bi';
 
 import { Nav, Layouts, CardPost, Alert, ModalFormImage } from '@/components';
 import { routes } from '@/utils';
 import { generateUUID, styleIconNav } from '@/utils/common';
 import { State, addImage, setImages, updateImage, deleteImage } from '@/store/images/reducer';
-import { useEffect, useState } from 'react';
-import { BiImageAdd, BiSolidEditAlt, BiSolidTrash } from 'react-icons/bi';
 import { useLocalStorage } from '@/hooks';
 
 export const ACTIONS = {

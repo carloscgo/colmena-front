@@ -1,5 +1,4 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { HYDRATE } from 'next-redux-wrapper';
+import { createSlice } from '@reduxjs/toolkit';
 
 export type Images = {
   id: number,
@@ -41,16 +40,6 @@ export const imagesSlice = createSlice({
       images[index].url = action.payload.url;
 
       state.images = images;
-    },
-
-    // Special reducer for hydrating the state
-    extraReducers: (builder: any) => {
-      builder.addCase(HYDRATE, (state: State, action: PayloadAction<{ images: Images[] }>) => {
-        return {
-          ...state,
-          images: [...action.payload.images],
-        };
-      });
     },
   },
 });

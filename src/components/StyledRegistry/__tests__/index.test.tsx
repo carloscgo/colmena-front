@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import StyledRegistry from './';
+import StyledRegistry from '..';
 
 describe('StyledRegistry', () => {
   it('renders children on the client side', () => {

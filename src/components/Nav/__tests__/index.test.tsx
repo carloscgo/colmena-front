@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Nav from './';
+import Nav from '..';
 
 const mockPrevious = [
   {

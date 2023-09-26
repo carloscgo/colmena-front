@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import ModalFormImage, { schema } from './';
+import ModalFormImage, { schema } from '..';
 import { act } from 'react-dom/test-utils';
 
 describe('ModalFormImage', () => {

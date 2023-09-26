@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import CardPost from './';
+import CardPost from '..';
 
 describe('CardPost', () => {
   const mockOnEdit = jest.fn();

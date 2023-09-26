@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import DashboardLayout from './';
+import DashboardLayout from '..';
 import { appName } from '@/utils/common';
 
 describe('Dashboard', () => {
