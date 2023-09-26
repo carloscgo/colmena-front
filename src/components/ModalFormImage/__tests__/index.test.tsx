@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import ModalFormImage, { schema } from '..';
-import { act } from 'react-dom/test-utils';
 
 describe('ModalFormImage', () => {
   const mockInputs = {
@@ -12,6 +11,8 @@ describe('ModalFormImage', () => {
 
   const mockOnSubmit = jest.fn();
   const mockOnClose = jest.fn();
+
+  global.console.error = jest.fn();
 
   beforeEach(() => {
     render(
